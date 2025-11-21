@@ -58,7 +58,6 @@ export function setupEditTaskModalHandler(taskId) {
     if (form.checkValidity()) {
       editTask(taskId);
       modal.close();
-      alert("Task edited successfully!");
     } else {
       form.reportValidity();
     }
@@ -91,7 +90,6 @@ export function setupDeleteTaskHandler(taskId) {
     deleteTask(taskId);
     confirmationModal.close();
     document.getElementById("task-modal").close();
-    alert("Task deleted successfully!");
   });
 
   // Cancel delete
