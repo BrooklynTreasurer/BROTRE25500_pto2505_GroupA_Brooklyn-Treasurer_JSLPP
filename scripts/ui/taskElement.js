@@ -1,4 +1,4 @@
-import { openTaskModal } from "./modalHandlers.js";
+import { openTaskModal,  } from "./modalHandlers.js";
 
 export function createTaskElement(task) {
   const taskDiv = document.createElement("div");
