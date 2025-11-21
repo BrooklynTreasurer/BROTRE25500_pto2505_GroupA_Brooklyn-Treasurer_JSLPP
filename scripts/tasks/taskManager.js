@@ -39,7 +39,11 @@ export function editTask(taskId) {
   if (!title) return;
 
   const tasks = loadTasksFromStorage();
+  console.log("Loaded tasks:", tasks);
+
   const taskIndex = tasks.findIndex((t) => t.id === taskId);
+  console.log("Task index found:", taskIndex);
+
   if (taskIndex === -1) return;
 
   tasks[taskIndex] = {
@@ -50,6 +54,7 @@ export function editTask(taskId) {
   };
 
   saveTasksToStorage(tasks);
+  console.log("Updated tasks:", tasks);
 
   clearExistingTasks();
   renderTasks(tasks);
