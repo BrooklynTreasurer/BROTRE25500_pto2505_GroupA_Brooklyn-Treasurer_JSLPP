@@ -1,4 +1,4 @@
-import { addNewTask,editTask } from "../tasks/taskManager.js";
+import { addNewTask, editTask } from "../tasks/taskManager.js";
 
 export function setupModalCloseHandler() {
   const modal = document.getElementById("task-modal");
@@ -35,11 +35,14 @@ export function openTaskModal(task) {
   document.getElementById("task-desc").value = task.description;
   document.getElementById("task-status").value = task.status;
   modal.showModal();
+  
+  // Set up the edit handler after opening the modal
+  setupEditTaskModalHandler(task.id);
 }
 
 export function setupEditTaskModalHandler(taskId) {
-  const overlay = document.querySelector(".modal-overlay");
-  const form = document.querySelector(".modal-window");
+  const modal = document.getElementById("task-modal");
+  const form = document.querySelector(".modal-edit-task");
   const saveChangesBtn = document.getElementById("save-changes-btn");
 
   // Clear previous event listeners to avoid duplicates
@@ -48,10 +51,11 @@ export function setupEditTaskModalHandler(taskId) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    
     if (form.checkValidity()) {
       editTask(taskId);
-      overlay.close(); // Close the modal after editing
-      alert("Task edited successfully!"); // Provide feedback
+      modal.close();
+      alert("Task edited successfully!");
     } else {
       form.reportValidity();
     }

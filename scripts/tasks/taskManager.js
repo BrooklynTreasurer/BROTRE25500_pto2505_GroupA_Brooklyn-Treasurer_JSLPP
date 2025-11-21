@@ -31,18 +31,16 @@ export function addNewTask() {
 }
 
 export function editTask(taskId) {
-  const title = document.getElementById("title-input").value.trim();
-  const description = document.getElementById("desc-input").value.trim();
-  const status = document.getElementById("select-status").value;
-  const overlay = document.querySelector(".modal-overlay");
+  const title = document.getElementById("task-title").value.trim();
+  const description = document.getElementById("task-desc").value.trim();
+  const status = document.getElementById("task-status").value;
+
+  console.log("Editing task:", taskId, { title, description, status });
 
   if (!title) return;
 
   const tasks = loadTasksFromStorage();
-  console.log("Loaded tasks:", tasks);
-
   const taskIndex = tasks.findIndex((t) => t.id === taskId);
-  console.log("Task index found:", taskIndex);
 
   if (taskIndex === -1) return;
 
@@ -54,10 +52,7 @@ export function editTask(taskId) {
   };
 
   saveTasksToStorage(tasks);
-  console.log("Updated tasks:", tasks);
-
   clearExistingTasks();
   renderTasks(tasks);
   resetForm();
-  overlay.close();
 }

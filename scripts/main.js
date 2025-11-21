@@ -3,7 +3,9 @@ import { clearExistingTasks, renderTasks } from "./ui/render.js";
 import {
   setupModalCloseHandler,
   setupNewTaskModalHandler,
+  setupEditTaskModalHandler,
 } from "./ui/modalHandlers.js";
+import { editTask } from "./tasks/taskManager.js";
 
 function initTaskBoard() {
   const tasks = loadTasksFromStorage();
@@ -11,6 +13,7 @@ function initTaskBoard() {
   renderTasks(tasks);
   setupModalCloseHandler();
   setupNewTaskModalHandler();
+  setupEditTaskModalHandler();
 }
 
 document.addEventListener("DOMContentLoaded", initTaskBoard);
