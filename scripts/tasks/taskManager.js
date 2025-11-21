@@ -56,3 +56,13 @@ export function editTask(taskId) {
   renderTasks(tasks);
   resetForm();
 }
+
+export function deleteTask(taskId) {
+  const tasks = loadTasksFromStorage();
+  const updatedTasks = tasks.filter((t) => t.id !== taskId);
+
+  saveTasksToStorage(updatedTasks);
+  clearExistingTasks();
+  renderTasks(updatedTasks);
+  resetForm();
+}
