@@ -1,4 +1,4 @@
-import { addNewTask, editTask } from "../tasks/taskManager.js";
+import { addNewTask, editTask, deleteTask} from "../tasks/taskManager.js";
 
 export function setupModalCloseHandler() {
   const modal = document.getElementById("task-modal");
@@ -59,5 +59,20 @@ export function setupEditTaskModalHandler(taskId) {
     } else {
       form.reportValidity();
     }
+  });
+}
+
+export function setupDeleteTaskHandler(taskId) {
+  const deleteBtn = document.getElementById("delete-task-btn");
+
+  // Remove all previous event listeners to prevent duplicates
+  const newButton = deleteBtn.cloneNode(true);
+  deleteBtn.parentNode.replaceChild(newButton, deleteBtn);
+
+  newButton.addEventListener("click", () => {
+    deleteTask(taskId);
+    const modal = document.getElementById("task-modal");
+    modal.close();
+    alert("Task deleted successfully!");
   });
 }

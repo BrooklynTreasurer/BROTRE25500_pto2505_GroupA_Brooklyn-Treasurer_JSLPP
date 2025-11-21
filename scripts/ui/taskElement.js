@@ -1,4 +1,5 @@
 import { openTaskModal } from "./modalHandlers.js";
+import { deleteTask } from "../tasks/taskManager.js";
 
 export function createTaskElement(task) {
   const taskDiv = document.createElement("div");
