@@ -9,7 +9,7 @@ export async function fetchIntialTasks() {
   }
 
     try {
-        const response = await fetch(`${API_URL}tasks`);
+        const response = await fetch(API_URL);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
