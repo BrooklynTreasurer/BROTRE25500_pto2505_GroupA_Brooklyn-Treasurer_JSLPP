@@ -42,14 +42,14 @@ export function openTaskModal(task) {
 
 export function setupEditTaskModalHandler(taskId) {
   const modal = document.getElementById("task-modal");
-  const form = document.querySelector(".modal-edit-task");
+  const form = document.getElementById("task-form");
   const saveChangesBtn = document.getElementById("save-changes-btn");
 
-  // Clear previous event listeners to avoid duplicates
-  saveChangesBtn.removeEventListener("click", handleSubmit);
-  saveChangesBtn.addEventListener("click", handleSubmit);
-
-  function handleSubmit(e) {
+  // Remove all previous event listeners to prevent duplicates
+  const newButton = saveChangesBtn.cloneNode(true);
+  saveChangesBtn.parentNode.replaceChild(newButton, saveChangesBtn);
+  
+  newButton.addEventListener("click", (e) => {
     e.preventDefault();
     
     if (form.checkValidity()) {
@@ -59,5 +59,5 @@ export function setupEditTaskModalHandler(taskId) {
     } else {
       form.reportValidity();
     }
-  }
+  });
 }
