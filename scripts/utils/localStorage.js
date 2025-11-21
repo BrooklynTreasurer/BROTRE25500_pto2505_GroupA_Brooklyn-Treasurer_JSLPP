@@ -1,4 +1,10 @@
 import { allTasks } from "../api/fetchTasks.js";
+import { fetchIntialTasks } from "../api/fetchTasks.js";
+
+// Ensure initialTasks is populated before using localStorage functions
+fetchIntialTasks().then(() => {
+  // initialTasks are now available
+});
 
 /**
  * Loads tasks from localStorage or initializes with initialTasks.
@@ -26,3 +32,4 @@ export function loadTasksFromStorage() {
 export function saveTasksToStorage(tasks) {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
+

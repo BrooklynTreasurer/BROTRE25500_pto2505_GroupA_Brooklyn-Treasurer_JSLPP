@@ -38,6 +38,9 @@ export function openTaskModal(task) {
   
   // Set up the edit handler after opening the modal
   setupEditTaskModalHandler(task.id);
+  
+  // Set up the delete handler after opening the modal
+  setupDeleteTaskHandler(task.id);
 }
 
 export function setupEditTaskModalHandler(taskId) {
@@ -64,15 +67,35 @@ export function setupEditTaskModalHandler(taskId) {
 
 export function setupDeleteTaskHandler(taskId) {
   const deleteBtn = document.getElementById("delete-task-btn");
+  const confirmationModal = document.getElementById("delete-confirmation-modal");
+  const confirmDeleteBtn = document.getElementById("confirm-delete-btn");
+  const cancelDeleteBtn = document.getElementById("cancel-delete-btn");
 
   // Remove all previous event listeners to prevent duplicates
-  const newButton = deleteBtn.cloneNode(true);
-  deleteBtn.parentNode.replaceChild(newButton, deleteBtn);
+  const newDeleteBtn = deleteBtn.cloneNode(true);
+  deleteBtn.parentNode.replaceChild(newDeleteBtn, deleteBtn);
 
-  newButton.addEventListener("click", () => {
+  newDeleteBtn.addEventListener("click", () => {
+    confirmationModal.showModal();
+  });
+
+  // Remove previous listeners from confirmation buttons
+  const newConfirmBtn = confirmDeleteBtn.cloneNode(true);
+  confirmDeleteBtn.parentNode.replaceChild(newConfirmBtn, confirmDeleteBtn);
+
+  const newCancelBtn = cancelDeleteBtn.cloneNode(true);
+  cancelDeleteBtn.parentNode.replaceChild(newCancelBtn, cancelDeleteBtn);
+
+  // Confirm delete
+  newConfirmBtn.addEventListener("click", () => {
     deleteTask(taskId);
-    const modal = document.getElementById("task-modal");
-    modal.close();
+    confirmationModal.close();
+    document.getElementById("task-modal").close();
     alert("Task deleted successfully!");
+  });
+
+  // Cancel delete
+  newCancelBtn.addEventListener("click", () => {
+    confirmationModal.close();
   });
 }

@@ -4,6 +4,7 @@ import {
   setupModalCloseHandler,
   setupNewTaskModalHandler,
   setupEditTaskModalHandler,
+  setupDeleteTaskHandler,
 } from "./ui/modalHandlers.js";
 import { editTask } from "./tasks/taskManager.js";
 
@@ -14,6 +15,7 @@ function initTaskBoard() {
   setupModalCloseHandler();
   setupNewTaskModalHandler();
   setupEditTaskModalHandler();
+  setupDeleteTaskHandler();
 }
 
 document.addEventListener("DOMContentLoaded", initTaskBoard);
