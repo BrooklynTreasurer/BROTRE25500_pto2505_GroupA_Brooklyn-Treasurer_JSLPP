@@ -226,6 +226,19 @@ dialog {
 }
 
 /* Style the modal box */
+
+#delete-confirmation-modal{
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+  padding: 24px;
+  background-color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
 #task-modal::backdrop {
   background: rgba(0, 0, 0, 0.3);
 }
@@ -397,6 +410,38 @@ textarea {
   font-weight: 600;
   cursor: pointer;
   margin-top: 25px;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+#confirm-delete-btn {
+  background-color: #ea5555;
+  color: white;
+  border-radius: 30px;
+  border: 0;
+  font-size: 16px;
+  padding: 14px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 15px;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+#cancel-delete-btn {
+  background-color: #828fa3;
+  color: white;
+  border-radius: 30px;
+  border: 0;
+  font-size: 16px;
+  padding: 14px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 15px;
   padding-left: 60px;
   padding-right: 60px;
 }
