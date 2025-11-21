@@ -380,7 +380,9 @@ textarea {
   padding-right: 20px;
   font-weight: 600;
   cursor: pointer;
-  margin: 5px 0; /* Optional: adds a margin between buttons */
+  margin-top: 25px;
+  padding-left: 60px;
+  padding-right: 60px;
 }
 
 #delete-task-btn {
@@ -394,8 +396,17 @@ textarea {
   padding-right: 20px;
   font-weight: 600;
   cursor: pointer;
-  margin: 5px 10px 5px 0; /* Optional: adds a margin between buttons */
+  margin-top: 25px;
+  padding-left: 60px;
+  padding-right: 60px;
 }
+
+.button-group-1 {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
+
 /* ========================
    Responsive Styles
 ======================== */
