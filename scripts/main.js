@@ -7,6 +7,7 @@ import {
   setupDeleteTaskHandler,
 } from "./ui/modalHandlers.js";
 import { editTask } from "./tasks/taskManager.js";
+import {toggleTheme } from "./utils/theme.js";
 
 function initTaskBoard() {
   const tasks = loadTasksFromStorage();
@@ -16,6 +17,7 @@ function initTaskBoard() {
   setupNewTaskModalHandler();
   setupEditTaskModalHandler();
   setupDeleteTaskHandler();
+  toggleTheme();
 }
 
 document.addEventListener("DOMContentLoaded", initTaskBoard);
