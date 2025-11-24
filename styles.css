@@ -85,6 +85,27 @@ h4 {
   overflow: hidden; /* Prevents overflowed text/icons from showing */
 }
 
+.side-bar-bottom-div {
+  margin-top: auto; /* Pushes to bottom of sidebar */
+  margin-bottom: 32px;
+  padding-left: 50px;
+  align-items: center;
+}
+
+.theme-toggle-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background-color: #F4F7FD;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 6px;
+  padding-right: 6px;
+  border-radius: 10px;
+  margin-left: -40px;
+}
+
 /* ===============
    Main Layout
 ================ */
