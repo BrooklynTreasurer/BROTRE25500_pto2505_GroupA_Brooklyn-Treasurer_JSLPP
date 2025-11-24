@@ -106,6 +106,22 @@ h4 {
   margin-left: -40px;
 }
 
+#hide-sidebar-btn {
+  background: #F4F7FD;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: -60px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 60px;
+  padding-right: 120px;
+  font-weight: bold;
+  color: var(--primary-btn-color);
+}
 /* ===============
    Main Layout
 ================ */
