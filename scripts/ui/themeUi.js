@@ -55,7 +55,7 @@ export function initThemeUi() {
   });
 }
 
-// Auto-init when DOM is ready (safe if called from main.js instead - optional)
+// Auto-init when DOM is ready
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initThemeUi);
 } else {

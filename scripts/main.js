@@ -1,23 +1,20 @@
+// Entrypoint: import and call UI init functions used across the app
+
+import { initThemeUi } from "./ui/themeUi.js";
+import { setupNewTaskModalHandler, setupModalCloseHandler } from "./ui/modalHandlers.js";
+import { renderTasks, clearExistingTasks } from "./ui/render.js";
 import { loadTasksFromStorage } from "./utils/localStorage.js";
-import { clearExistingTasks, renderTasks } from "./ui/render.js";
-import {
-  setupModalCloseHandler,
-  setupNewTaskModalHandler,
-  setupEditTaskModalHandler,
-  setupDeleteTaskHandler,
-} from "./ui/modalHandlers.js";
-import { editTask } from "./tasks/taskManager.js";
-import {toggleTheme } from "./utils/theme.js";
 
-function initTaskBoard() {
-  const tasks = loadTasksFromStorage();
-  clearExistingTasks();
-  renderTasks(tasks);
-  setupModalCloseHandler();
+document.addEventListener("DOMContentLoaded", () => {
+  // Theme (loads saved preference and wires the toggle)
+  initThemeUi();
+
+  // Modals / form handlers
   setupNewTaskModalHandler();
-  setupEditTaskModalHandler();
-  setupDeleteTaskHandler();
-  toggleTheme();
-}
+  setupModalCloseHandler();
 
-document.addEventListener("DOMContentLoaded", initTaskBoard);
+  // Render tasks stored in localStorage (or initial tasks if none)
+  clearExistingTasks();
+  const tasks = loadTasksFromStorage();
+  renderTasks(tasks);
+});
