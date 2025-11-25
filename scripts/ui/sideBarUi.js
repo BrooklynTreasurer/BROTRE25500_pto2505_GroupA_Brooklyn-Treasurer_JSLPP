@@ -63,17 +63,22 @@ function showSidebarToggleButton() {
     } else {
       document.body.insertAdjacentElement("afterbegin", showBtn);
     }
+
+    // Add click listener only once (when button is created)
+    showBtn.addEventListener("click", handleShowSidebar);
   }
   
   // Show the button
   showBtn.style.display = "block";
-  
-  // Add click listener to show sidebar
-  showBtn.addEventListener("click", () => {
-    const sidebar = document.getElementById("side-bar-div");
-    toggleSidebarVisibility(sidebar);
-    hideSidebarToggleButton();
-  });
+}
+
+/**
+ * Handler for showing the sidebar
+ */
+function handleShowSidebar() {
+  const sidebar = document.getElementById("side-bar-div");
+  toggleSidebarVisibility(sidebar);
+  hideSidebarToggleButton();
 }
 
 /**
