@@ -1,9 +1,11 @@
-import { addNewTask, editTask, deleteTask} from "../tasks/taskManager.js";
+import { addNewTask, editTask, deleteTask } from "../tasks/taskManager.js";
 
 export function setupModalCloseHandler() {
   const modal = document.getElementById("task-modal");
   const closeBtn = document.getElementById("close-modal-btn");
-  closeBtn.addEventListener("click", () => modal.close());
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => modal.close());
+  }
 }
 
 export function setupNewTaskModalHandler() {
@@ -12,6 +14,11 @@ export function setupNewTaskModalHandler() {
   const form = document.querySelector(".modal-window");
   const cancelBtn = document.getElementById("cancel-add-btn");
 
+  if (!newTaskBtn || !overlay || !form) {
+    console.error("New task modal elements not found");
+    return;
+  }
+
   newTaskBtn.addEventListener("click", () => {
     overlay.style.visibility = "visible";
     overlay.showModal();
@@ -19,10 +26,11 @@ export function setupNewTaskModalHandler() {
 
   cancelBtn.addEventListener("click", () => overlay.close());
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
     if (form.checkValidity()) {
-      addNewTask();
+      console.log("Form is valid, calling addNewTask");
+      await addNewTask();
     } else {
       form.reportValidity();
     }
@@ -48,15 +56,22 @@ export function setupEditTaskModalHandler(taskId) {
   const form = document.getElementById("task-form");
   const saveChangesBtn = document.getElementById("save-changes-btn");
 
+  if (!form || !saveChangesBtn) {
+    console.error("Edit task form elements not found");
+    return;
+  }
+
   // Remove all previous event listeners to prevent duplicates
   const newButton = saveChangesBtn.cloneNode(true);
   saveChangesBtn.parentNode.replaceChild(newButton, saveChangesBtn);
   
-  newButton.addEventListener("click", (e) => {
+  newButton.addEventListener("click", async (e) => {
     e.preventDefault();
+    console.log("Save changes clicked for task:", taskId);
     
     if (form.checkValidity()) {
-      editTask(taskId);
+      console.log("Form is valid, calling editTask");
+      await editTask(taskId);
       modal.close();
     } else {
       form.reportValidity();
@@ -70,11 +85,17 @@ export function setupDeleteTaskHandler(taskId) {
   const confirmDeleteBtn = document.getElementById("confirm-delete-btn");
   const cancelDeleteBtn = document.getElementById("cancel-delete-btn");
 
+  if (!deleteBtn || !confirmationModal || !confirmDeleteBtn || !cancelDeleteBtn) {
+    console.error("Delete task elements not found");
+    return;
+  }
+
   // Remove all previous event listeners to prevent duplicates
   const newDeleteBtn = deleteBtn.cloneNode(true);
   deleteBtn.parentNode.replaceChild(newDeleteBtn, deleteBtn);
 
   newDeleteBtn.addEventListener("click", () => {
+    console.log("Delete button clicked for task:", taskId);
     confirmationModal.showModal();
   });
 
@@ -86,14 +107,16 @@ export function setupDeleteTaskHandler(taskId) {
   cancelDeleteBtn.parentNode.replaceChild(newCancelBtn, cancelDeleteBtn);
 
   // Confirm delete
-  newConfirmBtn.addEventListener("click", () => {
-    deleteTask(taskId);
+  newConfirmBtn.addEventListener("click", async () => {
+    console.log("Confirming delete for task:", taskId);
+    await deleteTask(taskId);
     confirmationModal.close();
     document.getElementById("task-modal").close();
   });
 
   // Cancel delete
   newCancelBtn.addEventListener("click", () => {
+    console.log("Delete cancelled");
     confirmationModal.close();
   });
 }
