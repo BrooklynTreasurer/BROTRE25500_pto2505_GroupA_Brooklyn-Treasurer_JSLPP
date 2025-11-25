@@ -172,7 +172,7 @@ h4 {
 }
 
 #hide-sidebar-icon {
-  width: 20px;
+  width: px;
   height: 20px;
 }
 /* ===============
@@ -341,7 +341,7 @@ dialog {
   width: 90%;
   max-width: 600px;
   padding: 24px;
-  background-color: #fff;
+  background-color: var(--primary-color);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   /*font-family: "Plus Jakarta Sans", sans-serif;*/
 }
@@ -356,6 +356,7 @@ dialog {
 .modal-header h3 {
   margin: 0;
   font-size: 1.125rem;
+  color: var(--primary-font-color);
 }
 
 .close-btn {
