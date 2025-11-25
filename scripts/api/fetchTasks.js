@@ -9,8 +9,8 @@ export async function fetchInitialTasks() {
   }
 
   try {
-    console.log("Fetching from API:", `${API_URL}tasks`);
-    const response = await fetch(`${API_URL}tasks`);
+    console.log("Fetching from API:", `${API_URL}`);
+    const response = await fetch(`${API_URL}`);
     
     console.log("Response status:", response.status);
     
