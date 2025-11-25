@@ -4,10 +4,14 @@ import { initThemeUi } from "./ui/themeUi.js";
 import { setupNewTaskModalHandler, setupModalCloseHandler } from "./ui/modalHandlers.js";
 import { renderTasks, clearExistingTasks } from "./ui/render.js";
 import { loadTasksFromStorage } from "./utils/localStorage.js";
+import { initSidebarToggle } from "./ui/sideBarUi.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   // Theme (loads saved preference and wires the toggle)
   initThemeUi();
+
+  // Sidebar toggle
+  initSidebarToggle();
 
   // Modals / form handlers
   setupNewTaskModalHandler();

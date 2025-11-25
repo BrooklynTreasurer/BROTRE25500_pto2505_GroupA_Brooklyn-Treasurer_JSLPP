@@ -55,6 +55,10 @@ body {
   height: 100vh;
 }
 
+.side-bar-visibility-hidden {
+  display: none;
+}
+
 #side-logo-div {
   margin: 33px 113px 54px 34px; /* Spacing around logo */
   display: flex;
