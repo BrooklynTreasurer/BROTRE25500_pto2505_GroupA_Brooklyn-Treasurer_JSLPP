@@ -6,7 +6,7 @@ import { renderTasks, clearExistingTasks } from "./ui/render.js";
 import { loadTasksFromStorage } from "./utils/localStorage.js";
 import { initSidebarToggle } from "./ui/sideBarUi.js";
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   // Theme (loads saved preference and wires the toggle)
   initThemeUi();
 
@@ -17,8 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
   setupNewTaskModalHandler();
   setupModalCloseHandler();
 
-  // Render tasks stored in localStorage (or initial tasks if none)
+  // Render tasks stored in localStorage or fetch from API
   clearExistingTasks();
-  const tasks = loadTasksFromStorage();
+  const tasks = await loadTasksFromStorage();
+  console.log("Tasks to render:", tasks);
   renderTasks(tasks);
 });

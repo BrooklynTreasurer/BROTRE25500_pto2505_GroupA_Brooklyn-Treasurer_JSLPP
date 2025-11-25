@@ -1,28 +1,27 @@
-import { allTasks } from "../api/fetchTasks.js";
-import { fetchIntialTasks } from "../api/fetchTasks.js";
-
-// Ensure initialTasks is populated before using localStorage functions
-fetchIntialTasks().then(() => {
-  // initialTasks are now available
-});
+import { fetchInitialTasks } from "../api/fetchTasks.js";
 
 /**
- * Loads tasks from localStorage or initializes with initialTasks.
+ * Loads tasks from localStorage or initializes with API tasks.
  * @returns {Array<Object>} The array of tasks.
  */
-export function loadTasksFromStorage() {
+export async function loadTasksFromStorage() {
   const stored = localStorage.getItem("tasks");
+  
   if (stored) {
-    try {
-      return JSON.parse(stored);
-    } catch (err) {
-      console.error("Error parsing tasks from localStorage:", err);
-    }
+    console.log("Loading tasks from localStorage");
+    return JSON.parse(stored);
   }
 
-  // If no tasks in storage, initialize with initialTasks
-  localStorage.setItem("tasks", JSON.stringify(allTasks));
-  return allTasks;
+  // If no tasks in storage, fetch from API
+  console.log("No tasks in storage, fetching from API");
+  const apiTasks = await fetchInitialTasks();
+  
+  if (apiTasks && apiTasks.length > 0) {
+    localStorage.setItem("tasks", JSON.stringify(apiTasks));
+    return apiTasks;
+  }
+
+  return [];
 }
 
 /**
@@ -30,6 +29,11 @@ export function loadTasksFromStorage() {
  * @param {Array<Object>} tasks
  */
 export function saveTasksToStorage(tasks) {
-  localStorage.setItem("tasks", JSON.stringify(tasks));
+  try {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    console.log("Tasks saved to localStorage");
+  } catch (e) {
+    console.error("Failed to save tasks to storage:", e);
+  }
 }
 
