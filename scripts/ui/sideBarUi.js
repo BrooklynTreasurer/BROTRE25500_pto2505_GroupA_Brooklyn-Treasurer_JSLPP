@@ -90,4 +90,3 @@ function hideSidebarToggleButton() {
     showBtn.style.display = "none";
   }
 }
-
