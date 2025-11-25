@@ -3,7 +3,8 @@ const API_URL = "https://jsl-kanban-api.vercel.app/";
 let initialTasks;
 
 export async function fetchInitialTasks() {
-  if (initialTasks) {
+  if (initialTasks && initialTasks.length > 0) {
+    console.log("Returning cached tasks");
     return initialTasks;
   }
 
@@ -12,7 +13,6 @@ export async function fetchInitialTasks() {
     const response = await fetch(`${API_URL}tasks`);
     
     console.log("Response status:", response.status);
-    console.log("Response ok:", response.ok);
     
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -28,12 +28,18 @@ export async function fetchInitialTasks() {
       console.log("Data keys:", Object.keys(data));
       // Try to find the tasks array in the response
       const tasksArray = data.tasks || data.data || data.items || [];
+      console.log("Extracted tasks:", tasksArray);
       initialTasks = tasksArray;
-    } else {
+    } else if (Array.isArray(data)) {
+      console.log("Data is already an array");
       initialTasks = data;
+    } else {
+      console.warn("Unexpected data format:", data);
+      initialTasks = [];
     }
     
     console.log("Final initialTasks:", initialTasks);
+    console.log("Tasks count:", initialTasks.length);
     return initialTasks;
   } catch (error) {
     console.error("Failed to fetch tasks:", error);
