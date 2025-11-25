@@ -1,3 +1,9 @@
+import { 
+  saveSidebarPreference, 
+  loadSidebarPreference, 
+  toggleSidebarVisibility 
+} from "../utils/sidebar.js";
+
 export function initSidebarToggle() {
   const hideSidebarBtn = document.getElementById("hide-sidebar-btn");
   const sidebar = document.getElementById("side-bar-div");
@@ -7,10 +13,22 @@ export function initSidebarToggle() {
     return;
   }
 
+  // Load saved preference and apply it
+  const savedPreference = loadSidebarPreference();
+  if (savedPreference !== null) {
+    if (savedPreference) {
+      sidebar.classList.add("side-bar-visibility-hidden");
+      showSidebarToggleButton();
+    } else {
+      sidebar.classList.remove("side-bar-visibility-hidden");
+      hideSidebarToggleButton();
+    }
+  }
+
   hideSidebarBtn.addEventListener("click", () => {
-    sidebar.classList.toggle("side-bar-visibility-hidden");
+    toggleSidebarVisibility(sidebar);
     
-    // Show the "show sidebar" button when sidebar is hidden
+    // Show/hide the toggle button based on sidebar state
     if (sidebar.classList.contains("side-bar-visibility-hidden")) {
       showSidebarToggleButton();
     } else {
@@ -53,7 +71,7 @@ function showSidebarToggleButton() {
   // Add click listener to show sidebar
   showBtn.addEventListener("click", () => {
     const sidebar = document.getElementById("side-bar-div");
-    sidebar.classList.remove("side-bar-visibility-hidden");
+    toggleSidebarVisibility(sidebar);
     hideSidebarToggleButton();
   });
 }
