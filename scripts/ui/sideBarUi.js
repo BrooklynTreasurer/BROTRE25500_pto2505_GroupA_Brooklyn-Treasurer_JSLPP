@@ -1,7 +1,6 @@
-import { 
-  saveSidebarPreference, 
-  loadSidebarPreference, 
-  toggleSidebarVisibility 
+import {
+  loadSidebarPreference,
+  toggleSidebarVisibility,
 } from "../utils/sidebar.js";
 
 export function initSidebarToggle() {
@@ -13,23 +12,23 @@ export function initSidebarToggle() {
     return;
   }
 
-  // Load saved preference and apply it
+  // Apply saved preference
   const savedPreference = loadSidebarPreference();
   if (savedPreference !== null) {
     if (savedPreference) {
       sidebar.classList.add("side-bar-visibility-hidden");
-      showSidebarToggleButton();
+      showSidebarToggleButton(); // show the small tab if hidden
     } else {
       sidebar.classList.remove("side-bar-visibility-hidden");
       hideSidebarToggleButton();
     }
+  } else {
+    hideSidebarToggleButton();
   }
 
   hideSidebarBtn.addEventListener("click", () => {
-    toggleSidebarVisibility(sidebar);
-    
-    // Show/hide the toggle button based on sidebar state
-    if (sidebar.classList.contains("side-bar-visibility-hidden")) {
+    const isHidden = toggleSidebarVisibility(sidebar);
+    if (isHidden) {
       showSidebarToggleButton();
     } else {
       hideSidebarToggleButton();
@@ -42,21 +41,16 @@ export function initSidebarToggle() {
  */
 function showSidebarToggleButton() {
   let showBtn = document.getElementById("show-sidebar-btn");
-  
-  // If button doesn't exist, create it
+
   if (!showBtn) {
     showBtn = document.createElement("button");
     showBtn.id = "show-sidebar-btn";
     showBtn.className = "icon-btn show-sidebar-btn";
+    showBtn.type = "button";
     showBtn.innerHTML = `
-      <img
-        src="./assets/icon-show-sidebar.svg"
-        alt="show-sidebar-icon"
-        id="show-sidebar-icon"
-      />
+      <img src="./assets/icon-show-sidebar.svg" alt="show-sidebar-icon" id="show-sidebar-icon" />
     `;
-    
-    // Add to the main layout or body
+
     const layout = document.getElementById("layout");
     if (layout) {
       layout.insertAdjacentElement("beforebegin", showBtn);
@@ -64,12 +58,11 @@ function showSidebarToggleButton() {
       document.body.insertAdjacentElement("afterbegin", showBtn);
     }
 
-    // Add click listener only once (when button is created)
+    // attach listener once
     showBtn.addEventListener("click", handleShowSidebar);
   }
-  
-  // Show the button
-  showBtn.style.display = "block";
+
+  showBtn.style.display = "flex";
 }
 
 /**
@@ -77,6 +70,7 @@ function showSidebarToggleButton() {
  */
 function handleShowSidebar() {
   const sidebar = document.getElementById("side-bar-div");
+  if (!sidebar) return;
   toggleSidebarVisibility(sidebar);
   hideSidebarToggleButton();
 }
