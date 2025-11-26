@@ -1,4 +1,4 @@
-const SIDEBAR_STORAGE_KEY = "sidebarVisibility";
+export const SIDEBAR_STORAGE_KEY = "sidebarVisibility";
 
 /**
  * Save sidebar visibility preference to localStorage.
@@ -6,7 +6,7 @@ const SIDEBAR_STORAGE_KEY = "sidebarVisibility";
  */
 export function saveSidebarPreference(isHidden) {
   try {
-    localStorage.setItem(SIDEBAR_STORAGE_KEY, JSON.stringify(isHidden));
+    localStorage.setItem(SIDEBAR_STORAGE_KEY, JSON.stringify(Boolean(isHidden)));
   } catch (e) {
     console.error("Failed to save sidebar preference:", e);
   }
@@ -30,14 +30,16 @@ export function loadSidebarPreference() {
 /**
  * Toggle sidebar visibility and save preference
  * @param {HTMLElement} sidebar
+ * @returns {boolean} isHidden after toggle
  */
 export function toggleSidebarVisibility(sidebar) {
   if (!sidebar) {
-    console.error("Sidebar element not found");
-    return;
+    console.error("toggleSidebarVisibility: sidebar element not found");
+    return false;
   }
 
   sidebar.classList.toggle("side-bar-visibility-hidden");
   const isHidden = sidebar.classList.contains("side-bar-visibility-hidden");
   saveSidebarPreference(isHidden);
+  return isHidden;
 }

@@ -120,3 +120,47 @@ export function setupDeleteTaskHandler(taskId) {
     confirmationModal.close();
   });
 }
+
+export function setupTopLeftImageModal() {
+  const openBtn = document.getElementById("mobile-top-left-btn");
+  const modal = document.getElementById("mobile-top-modal");
+  const closeBtn = document.getElementById("mobile-top-modal-close");
+  const addTaskBtn = document.getElementById("mobile-add-task-btn");
+  const themeToggleBtn = document.getElementById("mobile-theme-toggle-btn");
+
+  if (!openBtn || !modal) return;
+
+  openBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    modal.showModal();
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => modal.close());
+  }
+
+  // Optional quick action wiring (call existing functions)
+  if (addTaskBtn) {
+    addTaskBtn.addEventListener("click", () => {
+      // open the add-new-task modal (reuse existing UI)
+      const addOverlay = document.querySelector(".modal-overlay");
+      if (addOverlay) {
+        addOverlay.showModal ? addOverlay.showModal() : addOverlay.style.visibility = "visible";
+      }
+      modal.close();
+    });
+  }
+
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener("click", () => {
+      // toggle theme via your existing checkbox or function
+      const checkbox = document.getElementById("theme-toggle-checkbox");
+      if (checkbox) {
+        checkbox.checked = !checkbox.checked;
+        // trigger change event so existing listener applies theme and saves preference
+        checkbox.dispatchEvent(new Event("change", { bubbles: true }));
+      }
+      modal.close();
+    });
+  }
+}
