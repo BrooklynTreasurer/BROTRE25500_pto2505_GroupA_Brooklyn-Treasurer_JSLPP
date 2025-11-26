@@ -121,6 +121,7 @@ export function setupDeleteTaskHandler(taskId) {
   });
 }
 
+
 export function setupMobileTopModalHandler() {
   const openBtn = document.getElementById("mobile-top-modal");
   const modal = document.getElementById("mobile-top-modal-overlay");
@@ -128,8 +129,19 @@ export function setupMobileTopModalHandler() {
   const addTaskBtn = document.getElementById("mobile-add-task-btn");
   const themeToggleBtn = document.getElementById("mobile-theme-toggle-btn");
 
-  if (!openBtn || !modal) return;
+  if (!openBtn || !modal) {
+    console.error("Mobile top modal elements not found");
+    return;
+  }
 
+  // Ensure modal is closed on page load
+  if (typeof modal.close === "function") {
+    modal.close();
+  } else {
+    modal.style.display = "none";
+  }
+
+  // Open modal when button is clicked
   openBtn.addEventListener("click", (e) => {
     e.preventDefault();
     if (typeof modal.showModal === "function") {
@@ -139,25 +151,30 @@ export function setupMobileTopModalHandler() {
     }
   });
 
+  // Close modal when close button is clicked
   if (closeBtn) {
-    closeBtn.addEventListener("click", () => {
-      if (typeof modal.close === "function") modal.close();
-      else modal.style.display = "none";
+    closeBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      closeMobileModal(modal);
     });
   }
 
+  // Add task quick action
   if (addTaskBtn) {
     addTaskBtn.addEventListener("click", () => {
       const addOverlay = document.querySelector(".modal-overlay");
       if (addOverlay) {
-        if (typeof addOverlay.showModal === "function") addOverlay.showModal();
-        else addOverlay.style.visibility = "visible";
+        if (typeof addOverlay.showModal === "function") {
+          addOverlay.showModal();
+        } else {
+          addOverlay.style.visibility = "visible";
+        }
       }
-      if (typeof modal.close === "function") modal.close();
-      else modal.style.display = "none";
+      closeMobileModal(modal);
     });
   }
 
+  // Toggle theme quick action
   if (themeToggleBtn) {
     themeToggleBtn.addEventListener("click", () => {
       const checkbox = document.getElementById("theme-toggle-checkbox");
@@ -165,8 +182,19 @@ export function setupMobileTopModalHandler() {
         checkbox.checked = !checkbox.checked;
         checkbox.dispatchEvent(new Event("change", { bubbles: true }));
       }
-      if (typeof modal.close === "function") modal.close();
-      else modal.style.display = "none";
+      closeMobileModal(modal);
     });
+  }
+}
+
+/**
+ * Close mobile modal handler
+ * @param {HTMLDialogElement} modal
+ */
+function closeMobileModal(modal) {
+  if (typeof modal.close === "function") {
+    modal.close();
+  } else {
+    modal.style.display = "none";
   }
 }

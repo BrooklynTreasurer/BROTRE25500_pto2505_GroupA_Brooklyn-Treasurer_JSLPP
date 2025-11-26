@@ -622,7 +622,7 @@ textarea {
   top: 15%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 90%;
+  width: 80%;
   max-width: 600px;
   display: flex;
   flex-direction: column;
@@ -722,4 +722,54 @@ textarea {
     padding-top: 0;
     padding-bottom: 0;
   }
+}
+
+/* Mobile Top Modal */
+#mobile-top-modal-overlay::backdrop {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+#mobile-top-modal-overlay {
+  display: none;
+}
+
+#mobile-top-modal-overlay[open] {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 600px;
+  padding: 24px;
+  gap: 20px;
+  background-color: var(--primary-color);
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 10px;
+  z-index: 3;
+  border: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-top-modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#mobile-top-modal-close {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  font-size: 2.5rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #ea5555;
+  transition: transform 0.2s ease-in-out;
+}
+
+#mobile-top-modal-close:hover {
+  transform: scale(1.15);
 }

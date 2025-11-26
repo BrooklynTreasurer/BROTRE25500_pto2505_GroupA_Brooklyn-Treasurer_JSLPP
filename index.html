@@ -223,9 +223,13 @@
     </dialog>
 
     <!-- Mobile Top Modal -->
-     <dialog id="mobile-top-modal-overlay">
+    <dialog id="mobile-top-modal-overlay">
       <div class="mobile-top-modal-content">
-        <h3>All boards</h3>
+        <div class="modal-header">
+          <h3>All boards</h3>
+          <button type="button" id="mobile-top-modal-close" class="close-btn">&times;</button>
+        </div>
+        <button class="board-btn">Launch Career</button>
         <div class="theme-toggle-div">
           <img
             src="./assets/icon-light-theme.svg"
@@ -243,6 +247,8 @@
             class="theme-icon"
             id="dark-mode-icon"
           />
+        </div>
       </div>
+    </dialog>
   </body>
 </html>
