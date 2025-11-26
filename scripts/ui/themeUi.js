@@ -1,4 +1,4 @@
-import { applyTheme } from "../utils/theme.js";
+import { applyTheme, updateAllThemeCheckboxes } from "../utils/theme.js";
 
 const STORAGE_KEY = "prefersDarkTheme";
 
@@ -30,28 +30,28 @@ export function loadThemePreference() {
 }
 
 /**
- * Initialize UI: set checkbox from stored preference (if any),
- * apply theme, and register change listener to save preference.
- * Call this on DOMContentLoaded (or import/run from main.js).
+ * Initialize UI: set all checkboxes from stored preference,
+ * apply theme, and register change listeners to save preference.
  */
 export function initThemeUi() {
-  const checkbox = document.getElementById("theme-toggle-checkbox");
-  if (!checkbox) return;
+  const checkboxes = document.querySelectorAll("#theme-toggle-checkbox");
+  if (checkboxes.length === 0) return;
 
   const stored = loadThemePreference();
-  if (stored !== null) {
-    checkbox.checked = stored;
-    applyTheme(stored);
-  } else {
-    // No stored preference: use current checkbox state
-    applyTheme(checkbox.checked);
-  }
+  const isDark = stored !== null ? stored : checkboxes[0].checked;
 
-  // Ensure single listener
-  checkbox.addEventListener("change", () => {
-    const isDark = checkbox.checked;
-    applyTheme(isDark);
-    saveThemePreference(isDark);
+  // Update all checkboxes and apply theme
+  updateAllThemeCheckboxes(isDark);
+  applyTheme(isDark);
+
+  // Add listener to each checkbox
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", (e) => {
+      const newDarkState = e.target.checked;
+      updateAllThemeCheckboxes(newDarkState);
+      applyTheme(newDarkState);
+      saveThemePreference(newDarkState);
+    });
   });
 }
 

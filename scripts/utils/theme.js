@@ -1,32 +1,49 @@
-// Function to apply the theme based on the checkbox state
+/**
+ * Apply theme to all elements (logo and body)
+ * @param {boolean} isDark
+ */
 export function applyTheme(isDark) {
-  const Themeicon = document.getElementById("logo");
-  if (!Themeicon) return;
+  const logo = document.getElementById("logo");
+  if (logo) {
+    logo.src = isDark ? "assets/logo-dark.svg" : "assets/logo-light.svg";
+  }
 
   document.body.classList.toggle("dark-theme", isDark);
-  Themeicon.src = isDark ? "assets/logo-dark.svg" : "assets/logo-light.svg";
 }
 
-// Function to toggle between light and dark themes
-export function toggleTheme() {
-  const checkbox = document.getElementById("theme-toggle-checkbox");
-  if (!checkbox) return;
-  applyTheme(checkbox.checked);
+/**
+ * Update all theme checkboxes to the same state
+ * @param {boolean} checked
+ */
+export function updateAllThemeCheckboxes(checked) {
+  const checkboxes = document.querySelectorAll("#theme-toggle-checkbox");
+  checkboxes.forEach((checkbox) => {
+    checkbox.checked = checked;
+  });
 }
 
-// Initialize the theme on page load
+/**
+ * Initialize theme and sync all checkboxes
+ */
 export function initTheme() {
-  const checkbox = document.getElementById("theme-toggle-checkbox");
-  if (!checkbox) return;
+  const checkboxes = document.querySelectorAll("#theme-toggle-checkbox");
+  if (checkboxes.length === 0) return;
 
-  // Apply initial theme from the checkbox state
-  applyTheme(checkbox.checked);
+  // Apply initial theme from first checkbox
+  const firstCheckbox = checkboxes[0];
+  applyTheme(firstCheckbox.checked);
 
-  // Register a single change listener
-  checkbox.addEventListener("change", () => applyTheme(checkbox.checked));
+  // Add listener to each checkbox
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", (e) => {
+      // Update all checkboxes to match the one that changed
+      updateAllThemeCheckboxes(e.target.checked);
+      applyTheme(e.target.checked);
+    });
+  });
 }
 
-// Run init on DOM ready so the checkbox state is respected on load
+// Run init on DOM ready
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initTheme);
 } else {
