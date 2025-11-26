@@ -776,8 +776,16 @@ textarea {
 
 #mobile-board-btn {
   margin-left: -24px;
+  padding-left: 90px;
 }
 
 #mobile-theme-toggle-div {
   margin-left: 20px;
+}
+
+#mobile-modal-header{
+  font-size: 0.75rem;
+  letter-spacing: 0.125rem;
+  color: var(--secondary-font-color);
+  margin: 0;
 }
