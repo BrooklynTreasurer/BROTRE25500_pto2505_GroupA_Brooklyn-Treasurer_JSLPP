@@ -722,6 +722,7 @@ textarea {
     padding-top: 0;
     padding-bottom: 0;
   }
+
 }
 
 /* Mobile Top Modal */
@@ -779,13 +780,23 @@ textarea {
   padding-left: 90px;
 }
 
-#mobile-theme-toggle-div {
-  margin-left: 20px;
-}
 
 #mobile-modal-header{
   font-size: 0.75rem;
   letter-spacing: 0.125rem;
   color: var(--secondary-font-color);
   margin: 0;
+}
+
+/******** Responsive placement for mobile theme toggle - placed at end to ensure it overrides earlier rules ********/
+@media (min-width: 577px) and (max-width: 1023px) {
+  #mobile-theme-toggle-div {
+    margin-left: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  #mobile-theme-toggle-div {
+    margin-left: 5px;
+  }
 }
