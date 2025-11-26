@@ -576,6 +576,10 @@ textarea {
   justify-content: center;
 }
 
+#mobile-top-modal {
+  display: none;
+}
+
 /* ========================
    Responsive Styles
 ======================== */
@@ -601,6 +605,14 @@ textarea {
     width: 30px;
     height: 30px;
     margin-right: 10px;
+  }
+
+  #mobile-top-modal {
+    background: var(--primary-color);
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: block;
   }
 
   body {
