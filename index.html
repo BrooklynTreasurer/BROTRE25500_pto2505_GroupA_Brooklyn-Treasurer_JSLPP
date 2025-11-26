@@ -133,6 +133,14 @@
           <option value="doing">doing</option>
           <option value="done">done</option>
         </select>
+
+        <label for="task-priority">Priority</label>
+        <select id="task-priority" name="priority" required>
+          <option value="low">low</option>
+          <option value="medium">medium</option>
+          <option value="high">high</option>
+        </select>
+
         <div class="button-group-1">
           <button type="submit" class="submit-btn" id="save-changes-btn">
             Save Changes
@@ -194,6 +202,18 @@
             <option value="doing">doing</option>
             <option value="done">done</option>
           </select>
+            <label
+            class="label-modal-window"
+            id="modal-select-priority"
+            for="select-priority"
+            >Priority</label
+          >
+          <select name="priority" id="select-priority" required>
+            <option value="low">low</option>
+            <option value="medium">medium</option>
+            <option value="high">high</option>
+          </select>
+
         </div>
         <div class="button-group">
           <input
