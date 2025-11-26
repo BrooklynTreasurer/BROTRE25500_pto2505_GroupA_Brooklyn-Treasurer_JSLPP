@@ -120,3 +120,53 @@ export function setupDeleteTaskHandler(taskId) {
     confirmationModal.close();
   });
 }
+
+export function setupMobileTopModalHandler() {
+  const openBtn = document.getElementById("mobile-top-modal");
+  const modal = document.getElementById("mobile-top-modal-overlay");
+  const closeBtn = document.getElementById("mobile-top-modal-close");
+  const addTaskBtn = document.getElementById("mobile-add-task-btn");
+  const themeToggleBtn = document.getElementById("mobile-theme-toggle-btn");
+
+  if (!openBtn || !modal) return;
+
+  openBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (typeof modal.showModal === "function") {
+      modal.showModal();
+    } else {
+      modal.style.display = "block";
+    }
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      if (typeof modal.close === "function") modal.close();
+      else modal.style.display = "none";
+    });
+  }
+
+  if (addTaskBtn) {
+    addTaskBtn.addEventListener("click", () => {
+      const addOverlay = document.querySelector(".modal-overlay");
+      if (addOverlay) {
+        if (typeof addOverlay.showModal === "function") addOverlay.showModal();
+        else addOverlay.style.visibility = "visible";
+      }
+      if (typeof modal.close === "function") modal.close();
+      else modal.style.display = "none";
+    });
+  }
+
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener("click", () => {
+      const checkbox = document.getElementById("theme-toggle-checkbox");
+      if (checkbox) {
+        checkbox.checked = !checkbox.checked;
+        checkbox.dispatchEvent(new Event("change", { bubbles: true }));
+      }
+      if (typeof modal.close === "function") modal.close();
+      else modal.style.display = "none";
+    });
+  }
+}
