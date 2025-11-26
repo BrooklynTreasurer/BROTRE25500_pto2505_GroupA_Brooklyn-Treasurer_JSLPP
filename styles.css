@@ -773,3 +773,11 @@ textarea {
 #mobile-top-modal-close:hover {
   transform: scale(1.15);
 }
+
+#mobile-board-btn {
+  margin-left: -24px;
+}
+
+#mobile-theme-toggle-div {
+  margin-left: 20px;
+}
