@@ -685,3 +685,65 @@ textarea {
     padding-bottom: 0;
   }
 }
+
+/* Mobile-only logo button */
+.logo-btn {
+  background: transparent;
+  border: none;
+  padding: 6px;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* small top modal */
+.mobile-top-modal::backdrop {
+  background: rgba(0,0,0,0.25);
+}
+
+.mobile-top-modal {
+  border: none;
+  padding: 0;
+  background: transparent;
+}
+
+.mobile-top-modal .mobile-top-modal-content {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  width: 260px;
+  max-width: calc(100% - 24px);
+  margin: 8px;
+  padding: 12px;
+  position: relative;
+}
+
+/* close button */
+.modal-close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* hide on desktop, show on mobile */
+@media (min-width: 641px) {
+  #mobile-top-left-btn,
+  .mobile-top-modal { display: none; }
+}
+
+/* ensure visible on mobile */
+@media (max-width: 640px) {
+  #mobile-top-left-btn { display: inline-flex; }
+}
+
+/* small adjustments for modal content */
+.mobile-top-modal .modal-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  justify-content: flex-start;
+}
