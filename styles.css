@@ -723,6 +723,11 @@ textarea {
     padding-bottom: 0;
   }
 
+  .button-group-1{
+    flex-direction: column;
+    gap: 6px;
+  }
+
 }
 
 /* Mobile Top Modal */
