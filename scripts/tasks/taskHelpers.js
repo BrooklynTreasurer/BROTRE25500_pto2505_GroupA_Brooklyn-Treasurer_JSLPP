@@ -1,32 +1,43 @@
-// Task prioritization helper functions
+/**
+ * Priority weight map (used for sorting)
+ */
+const PRIORITY_WEIGHT = {
+  high: 3,
+  medium: 2,
+  low: 1,
+};
 
-export function prioritizeTasks(tasks) {
-    const priorityOrder = { high: 1, medium: 2, low: 3 };
-    return tasks.sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]);
+/**
+ * Sort tasks based on priority (highest first)
+ * @param {Array} tasks
+ * @returns sorted array
+ */
+export function sortTasksByPriority(tasks) {
+  return tasks.sort(
+    (a, b) => PRIORITY_WEIGHT[b.priority] - PRIORITY_WEIGHT[a.priority]
+  );
 }
 
-export function filterTasksByPriority(tasks, priority) {
-    return tasks.filter(task => task.priority === priority);
+/**
+ * Filter tasks by priority
+ * @param {Array} tasks
+ * @param {string} priority - "low", "medium", "high"
+ * @returns filtered array
+ */
+export function filterTasks(tasks, priority) {
+  if (priority === "all") return tasks;
+  return tasks.filter((task) => task.priority === priority);
 }
 
-export function getTasksByPriorityLevel(tasks) {
-    return {
-        high: filterTasksByPriority(tasks, 'high'),
-        medium: filterTasksByPriority(tasks, 'medium'),
-        low: filterTasksByPriority(tasks, 'low'),
-    };
+/**
+ * Link the priority <select> dropdown
+ * and auto-filter tasks on change
+ * @param {HTMLElement} prioritySelect
+ * @param {Function} callback - function(filteredTasks) {}
+ */
+export function bindPrioritySelector(prioritySelect, callback) {
+  prioritySelect.addEventListener("change", (e) => {
+    const selected = e.target.value;
+    callback(selected);
+  });
 }
-
-export function addTaskWithPriority(tasks, newTask) {
-    tasks.push(newTask);
-    return prioritizeTasks(tasks);
-}
-
-export function updateTaskPriority(tasks, taskId, newPriority) {
-    const task = tasks.find(t => t.id === taskId);
-    if (task) {
-        task.priority = newPriority;
-    }
-    return prioritizeTasks(tasks);
-}
-
