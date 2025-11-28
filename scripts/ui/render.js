@@ -1,5 +1,4 @@
 import { createTaskElement } from "./taskElement.js";
-import { getTasksByPriorityLevel } from "../tasks/taskHelpers.js";
 
 /**
  * Finds the task container element based on task status.
@@ -9,7 +8,20 @@ function getTaskContainerByStatus(status) {
   return column ? column.querySelector(".tasks-container") : null;
 }
 
+export function sortTaskbyPriority() {
+  const priorityWeight = { high: 3, medium: 2, low: 1 };
 
+  // Loop through ALL task columns
+  document.querySelectorAll(".tasks-container").forEach((container) => {
+    const cards = Array.from(container.querySelectorAll(".task-div"));
+
+    cards.sort((a, b) => {
+      return priorityWeight[b.dataset.priority] - priorityWeight[a.dataset.priority];
+    });
+
+    cards.forEach(card => container.appendChild(card));
+  });
+}
 
 
 /**
@@ -31,5 +43,6 @@ export function renderTasks(tasks) {
       const taskElement = createTaskElement(task);
       container.appendChild(taskElement);
     }
-  });
+  })
+  sortTaskbyPriority();
 }

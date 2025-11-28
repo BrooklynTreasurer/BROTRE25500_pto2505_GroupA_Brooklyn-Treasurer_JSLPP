@@ -1,5 +1,5 @@
 import { loadTasksFromStorage, saveTasksToStorage } from "../utils/localStorage.js";
-import { clearExistingTasks, renderTasks } from "../ui/render.js";
+import { clearExistingTasks, renderTasks, sortTaskbyPriority } from "../ui/render.js";
 import { resetForm } from "./formUtils.js";
 
 export async function addNewTask() {
@@ -8,9 +8,10 @@ export async function addNewTask() {
   const title = document.getElementById("title-input").value.trim();
   const description = document.getElementById("desc-input").value.trim();
   const status = document.getElementById("select-status").value;
+  const priority = document.getElementById("select-priority").value;
   const overlay = document.querySelector(".modal-overlay");
 
-  console.log("Form values:", { title, description, status });
+  console.log("Form values:", { title, description, status , priority});
 
   if (!title) {
     console.warn("Title is empty, returning");
@@ -25,6 +26,7 @@ export async function addNewTask() {
     title,
     description,
     status,
+    priority,
   };
 
   console.log("New task created:", newTask);
@@ -35,6 +37,7 @@ export async function addNewTask() {
   saveTasksToStorage(updatedTasks);
   clearExistingTasks();
   renderTasks(updatedTasks);
+  sortTaskbyPriority(updatedTasks);
   resetForm();
   overlay.close();
 }
@@ -45,8 +48,9 @@ export async function editTask(taskId) {
   const title = document.getElementById("task-title").value.trim();
   const description = document.getElementById("task-desc").value.trim();
   const status = document.getElementById("task-status").value;
+  const priority = document.getElementById("task-priority").value;
 
-  console.log("Form values:", { title, description, status });
+  console.log("Form values:", { title, description, status , priority});
 
   if (!title) {
     console.warn("Title is empty, returning");
@@ -69,6 +73,7 @@ export async function editTask(taskId) {
     title,
     description,
     status,
+    priority,
   };
 
   console.log("Updated tasks:", tasks);
@@ -91,4 +96,5 @@ export async function deleteTask(taskId) {
   saveTasksToStorage(updatedTasks);
   clearExistingTasks();
   renderTasks(updatedTasks);
+  sortTaskbyPriority(updatedTasks);
 }

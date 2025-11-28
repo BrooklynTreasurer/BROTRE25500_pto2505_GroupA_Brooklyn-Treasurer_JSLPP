@@ -805,3 +805,23 @@ textarea {
     margin-left: 5px;
   }
 }
+
+/* task priority filter implementation */
+.priority-indicator {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-left: auto; 
+  margin-right: 16px; 
+  flex-shrink: 0;
+}
+
+.priority-low {
+  background-color: green;
+}
+.priority-medium {
+  background-color: orange;
+}
+.priority-high {
+  background-color: red;
+}
