@@ -437,10 +437,8 @@ form select {
   appearance: none; /* Remove native arrow */
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="%23828FA3" stroke-width="3" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>')
     no-repeat right 0.75rem center;
-
   background-size: 1.4rem;
   padding-right: 1rem;
-  background: #ffffff;
 }
 
 #add-new-task-btn {
